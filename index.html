@@ -232,7 +232,7 @@ var root=new THREE.Group();S.add(root);
 var cup=null,lid=null,beans=[],cupH=2.6,cupTopY=1.3,stream;
 var L=new THREE.GLTFLoader();
 function norm(obj,target){var b=new THREE.Box3().setFromObject(obj),sz=b.getSize(new THREE.Vector3()),c=b.getCenter(new THREE.Vector3());var s=target/Math.max(sz.x,sz.y,sz.z);obj.scale.setScalar(s);obj.position.set(-c.x*s,-c.y*s,-c.z*s);var g=new THREE.Group();g.add(obj);return {g:g,w:sz.x*s,h:sz.y*s}}
-L.load('cup.glb',function(gl){var n=norm(gl.scene,cupH);cup=n.g;cupTopY=n.h/2;root.add(cup);
+L.load('cup.glb',function(gl){gl.scene.traverse(function(c){if(c.isMesh){c.material.transparent=false;c.material.opacity=1;c.material.depthWrite=true;c.material.side=THREE.DoubleSide}});var n=norm(gl.scene,cupH);cup=n.g;cupTopY=n.h/2;root.add(cup);
  /* wieczko budowane w kodzie, dopasowane do średnicy kubka */
  var r=n.w/2,lm=new THREE.MeshStandardMaterial({color:0x0a0908,roughness:.55,metalness:0});
  lid=new THREE.Group();
@@ -248,7 +248,7 @@ L.load('bean.glb',function(gl){
  spots.forEach(function(p,i){var o=gl.scene.clone(true);o.traverse(function(c){if(c.isMesh){c.material=beanMat}});var n=norm(o,.42+(i%3)*.08);n.g.position.set(p[0],p[1],p[2]);n.g.userData={x:p[0],y:p[1],z:p[2],ph:i*1.3,sp:.25+(i%4)*.07};n.g.rotation.set(i,i*.7,i*.3);root.add(n.g);beans.push(n.g)})});
 /* --- realistyczna kawa: odbicia otoczenia, falująca struga, kropelki, tafla z pianką --- */
 /* płyn: ciemny środek, bursztynowe prześwitujące brzegi, połysk od światła (shader) */
-var coffeeMat=new THREE.ShaderMaterial({transparent:true,
+var coffeeMat=new THREE.ShaderMaterial({transparent:false,
  vertexShader:'varying vec3 vN;varying vec3 vV;void main(){vec4 mv=modelViewMatrix*vec4(position,1.);vN=normalize(normalMatrix*normal);vV=-mv.xyz;gl_Position=projectionMatrix*mv;}',
  fragmentShader:'varying vec3 vN;varying vec3 vV;void main(){vec3 N=normalize(vN),V=normalize(vV);if(dot(N,V)<0.)N=-N;float nv=clamp(dot(N,V),0.,1.);'+
  'vec3 dark=vec3(.16,.07,.025),amber=vec3(.62,.32,.11);vec3 c=mix(amber,dark,smoothstep(.05,.7,nv));'+
