@@ -25,7 +25,7 @@
 }
 *{box-sizing:border-box;margin:0;padding:0}
 html{background:var(--c2)}
-body{font-family:var(--bd);font-size:17px;line-height:1.6;color:var(--ink);background:#f6e7d2;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+body{font-family:var(--bd);font-size:17px;line-height:1.6;color:var(--cream);background:#1d130d;-webkit-font-smoothing:antialiased;overflow-x:hidden}
 a{color:inherit;text-underline-offset:4px}
 :focus-visible{outline:2px solid var(--gold);outline-offset:3px;border-radius:4px}
 h1,h2,h3{font-family:var(--hd);font-weight:400;line-height:1;letter-spacing:-.01em}
@@ -70,36 +70,49 @@ h1,h2,h3{font-family:var(--hd);font-weight:400;line-height:1;letter-spacing:-.01
 .duo .lbl{font:500 11px var(--bd);letter-spacing:.4em;text-transform:uppercase;opacity:.8}
 .duo h2{font-size:clamp(56px,8vw,128px);margin-top:12px}
 .duo p{margin-top:16px;max-width:30ch;opacity:.85}
-@media(max-width:760px){.duo{grid-template-columns:1fr}.duo > div{min-height:52vh}}
+.duo > div{position:relative;overflow:hidden}
+.duo > div > :not(.art){position:relative;z-index:1}
+.art{position:absolute;right:clamp(16px,5vw,64px);top:46%;width:min(46%,340px);transform:translateY(-50%);pointer-events:none}
+.spin{transform-box:fill-box;transform-origin:center;animation:spin 46s linear infinite}
+@keyframes spin{to{transform:rotate(360deg)}}
+.slosh{transform-box:view-box;transform-origin:100px 120px;animation:slosh 3.6s ease-in-out infinite alternate}
+@keyframes slosh{from{transform:rotate(-6deg)}to{transform:rotate(6deg)}}
+.wave{animation:wave 2.4s linear infinite}
+@keyframes wave{to{transform:translateX(-50px)}}
+@media(max-width:760px){.duo{grid-template-columns:1fr}.duo > div{min-height:56vh}.art{top:clamp(24px,5vh,48px);width:min(46vw,230px);transform:none}}
 
 .window{display:grid;grid-template-columns:minmax(0,5fr) minmax(0,6fr);gap:clamp(28px,6vw,90px);align-items:center}
-.frame{aspect-ratio:3/4;border:14px solid var(--ink);border-radius:180px 180px 10px 10px;background:linear-gradient(180deg,#f3d6ad,#c58c52);position:relative;overflow:hidden}
+.frame{aspect-ratio:3/4;border:12px solid #b9844c;border-radius:180px 180px 10px 10px;background:linear-gradient(180deg,#f3d6ad,#c58c52);position:relative;overflow:hidden;box-shadow:0 30px 80px rgba(0,0,0,.45)}
+.fcup{position:absolute;left:50%;bottom:58px;width:48%;transform:translateX(-50%);z-index:1}
+.steam path{opacity:0;animation:steam 3.4s ease-in-out infinite}
+.steam path:nth-child(2){animation-delay:1.1s}.steam path:nth-child(3){animation-delay:2.2s}
+@keyframes steam{0%{opacity:0;transform:translateY(10px)}40%{opacity:.85}100%{opacity:0;transform:translateY(-16px)}}
 .frame::after{content:"";position:absolute;inset:0;background:repeating-linear-gradient(115deg,rgba(255,255,255,0) 0 40px,rgba(255,255,255,.22) 40px 70px,rgba(255,255,255,0) 70px 140px);animation:beam 9s ease-in-out infinite alternate}
 .frame span{position:absolute;left:0;right:0;bottom:24px;text-align:center;font:500 11px var(--bd);letter-spacing:.36em;text-transform:uppercase;z-index:2}
 .window h2{font-size:clamp(46px,6vw,92px)}
-.window p{margin-top:16px;max-width:40ch;color:#5a4636}
+.window p{margin-top:16px;max-width:40ch;color:#d9c4a8}
 .btns{display:flex;flex-wrap:wrap;gap:12px;margin-top:28px}
-.btn{display:inline-flex;align-items:center;min-height:52px;padding:0 26px;border-radius:999px;border:1px solid var(--ink);font:500 12px var(--bd);letter-spacing:.24em;text-transform:uppercase;text-decoration:none}
-.btn.f{background:var(--ink);color:var(--cream)}
-.btn:hover{background:var(--ink);color:var(--cream)}
-@media(max-width:860px){.window{grid-template-columns:1fr}.frame{max-width:340px}}
+.btn{display:inline-flex;align-items:center;min-height:52px;padding:0 26px;border-radius:999px;border:1px solid rgba(251,241,227,.5);font:500 12px var(--bd);letter-spacing:.24em;text-transform:uppercase;text-decoration:none}
+.btn.f{background:var(--gold);border-color:var(--gold);color:var(--ink)}
+.btn:hover{background:var(--cream);color:var(--ink)}
+@media(max-width:640px){.window{grid-template-columns:1fr}.frame{max-width:320px;width:100%;margin:0 auto}}
 
-.hire{background:var(--ink);color:var(--cream);text-align:center;padding:clamp(50px,9vh,90px) var(--gut)}
+.hire{background:linear-gradient(120deg,#e3b56b,#c98a47);color:var(--ink);text-align:center;padding:clamp(50px,9vh,90px) var(--gut)}
 .hire p{font:500 11px var(--bd);letter-spacing:.4em;text-transform:uppercase;opacity:.7}
 .hire h3{font-size:clamp(34px,5vw,64px);margin-top:12px}
-.hire a{display:inline-block;margin-top:20px;color:var(--gold)}
+.hire a{display:inline-block;margin-top:20px;color:var(--wine)}
 
 .contact{display:grid;grid-template-columns:minmax(0,5fr) minmax(0,6fr);gap:clamp(28px,5vw,72px)}
 @media(max-width:860px){.contact{grid-template-columns:1fr}}
 .contact h2{font-size:clamp(46px,6vw,92px)}
 dl{display:grid;grid-template-columns:auto 1fr;gap:14px 26px;margin-top:26px}
-dt{font:500 11px var(--bd);letter-spacing:.3em;text-transform:uppercase;color:#7a5c44;padding-top:6px}
+dt{font:500 11px var(--bd);letter-spacing:.3em;text-transform:uppercase;color:#c99a66;padding-top:6px}
 dd{font-size:19px}
-.map{border-radius:24px;overflow:hidden;min-height:380px;border:1px solid #c9a982}
+.map{border-radius:24px;overflow:hidden;min-height:380px;border:1px solid #4a3426}
 .map iframe{width:100%;height:100%;min-height:380px;border:0;display:block;filter:sepia(.35) saturate(.9)}
-footer{padding:30px var(--gut) 50px;border-top:1px solid #d9bf9c}
-footer p{max-width:84ch;font-size:13px;color:#7a5c44}
-@media(prefers-reduced-motion:reduce){.beams,.frame::after{animation:none}*{transition-duration:.01ms!important}}
+footer{padding:30px var(--gut) 50px;border-top:1px solid #3a2a1f}
+footer p{max-width:84ch;font-size:13px;color:#b39a80}
+@media(prefers-reduced-motion:reduce){.beams,.frame::after,.spin,.slosh,.wave,.steam path{animation:none}.steam path{opacity:.6}*{transition-duration:.01ms!important}}
 </style>
 </head>
 <body>
@@ -128,13 +141,37 @@ footer p{max-width:84ch;font-size:13px;color:#7a5c44}
 </section>
 
 <section class="duo" id="kawa">
-  <div class="k"><span class="lbl">Specialty coffee</span><h2>Kawa</h2><p>Kawa specialty na miejscu i na wynos z okienka.</p></div>
-  <div class="w"><span class="lbl">Natural wine</span><h2>Wino</h2><p>Natural wine bar &amp; bottle shop: wino na miejscu albo butelka do domu.</p></div>
+  <div class="k">
+    <svg class="art" viewBox="0 0 200 200" aria-hidden="true"><defs><radialGradient id="crema" cx="50%" cy="50%" r="50%"><stop offset="0" stop-color="#5a2a10"/><stop offset=".55" stop-color="#9a5826"/><stop offset=".88" stop-color="#d49656"/><stop offset="1" stop-color="#6e3a17"/></radialGradient></defs>
+      <ellipse cx="104" cy="108" rx="92" ry="90" fill="rgba(27,18,11,.18)"/>
+      <circle cx="100" cy="100" r="92" fill="#f2e9de"/><circle cx="100" cy="100" r="74" fill="none" stroke="rgba(0,0,0,.07)" stroke-width="2"/>
+      <rect x="150" y="91" width="40" height="18" rx="9" fill="#1b120b"/>
+      <circle cx="100" cy="100" r="64" fill="#1b120b"/><circle cx="100" cy="100" r="62" fill="none" stroke="#e3b56b" stroke-width="1.2"/>
+      <g class="spin"><circle cx="100" cy="100" r="55" fill="url(#crema)"/>
+        <path d="M100 76C90 62 64 68 70 90 75 106 96 116 100 132 104 116 125 106 130 90 136 68 110 62 100 76Z" fill="#f3e2c8" opacity=".92"/>
+        <path d="M100 82C94 74 80 78 82 90 84 100 96 108 100 118 104 108 116 100 118 90 120 78 106 74 100 82Z" fill="#c78a4e" opacity=".55"/></g>
+      <ellipse cx="80" cy="74" rx="16" ry="6" fill="rgba(255,255,255,.18)" transform="rotate(-30 80 74)"/>
+    </svg>
+    <span class="lbl">Specialty coffee</span><h2>Kawa</h2><p>Kawa specialty na miejscu i na wynos z okienka.</p></div>
+  <div class="w">
+    <svg class="art" viewBox="0 0 200 240" aria-hidden="true"><defs><clipPath id="bowl"><path d="M56 22C52 84 66 126 100 132 134 126 148 84 144 22Z"/></clipPath><linearGradient id="vin" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#b3283f"/><stop offset="1" stop-color="#5e0e1e"/></linearGradient></defs>
+      <g clip-path="url(#bowl)"><g class="slosh"><path class="wave" d="M-20 76Q5 68 30 76T80 76T130 76T180 76T230 76T280 76V200H-20Z" fill="url(#vin)"/></g></g>
+      <path d="M56 22C52 84 66 126 100 132 134 126 148 84 144 22" fill="rgba(255,255,255,.05)" stroke="rgba(251,241,227,.75)" stroke-width="2.2"/>
+      <path d="M66 34C64 74 72 104 88 118" fill="none" stroke="rgba(255,255,255,.4)" stroke-width="3" stroke-linecap="round"/>
+      <path d="M100 132V214" stroke="rgba(251,241,227,.75)" stroke-width="3"/>
+      <ellipse cx="100" cy="216" rx="40" ry="7" fill="none" stroke="rgba(251,241,227,.75)" stroke-width="2.2"/>
+    </svg>
+    <span class="lbl">Natural wine</span><h2>Wino</h2><p>Natural wine bar &amp; bottle shop: wino na miejscu albo butelka do domu.</p></div>
 </section>
 
 <section class="sec" id="okienko">
   <div class="wrap window">
-    <div class="frame" aria-hidden="true"><span>okienko</span></div>
+    <div class="frame" aria-hidden="true">
+      <svg class="fcup" viewBox="0 0 120 170"><g class="steam" fill="none" stroke="rgba(255,255,255,.85)" stroke-width="3" stroke-linecap="round"><path d="M46 40c-6-8 6-14 0-22"/><path d="M60 38c-6-8 6-14 0-22"/><path d="M74 40c-6-8 6-14 0-22"/></g>
+        <path d="M26 52h68l-3 10H29z" fill="#14100c"/><path d="M30 48h60l2 4H28z" fill="#241a13"/>
+        <path d="M31 62h58l-9 100H40z" fill="#14100c"/><path d="M33 80h54" stroke="#e3b56b" stroke-width="1.6"/><path d="M38 146h44" stroke="#e3b56b" stroke-width=".8" opacity=".6"/>
+        <path d="M36 68l7 88" stroke="rgba(255,255,255,.12)" stroke-width="4"/></svg>
+      <span>okienko</span></div>
     <div>
       <h2>Okienko na wynos</h2>
       <p>Przystań ma okienko wydawki i odbiór na wynos. Kawa w drodze przez centrum Szczecina, przy ulicy Rayskiego 19.</p>
@@ -204,13 +241,49 @@ L.load('cup.glb',function(gl){var n=norm(gl.scene,cupH);cup=n.g;cupTopY=n.h/2;ro
  var dome=new THREE.Mesh(new THREE.CylinderGeometry(r*.78,r*.98,.2,64),lm);dome.position.y=.14;lid.add(dome);
  var top=new THREE.Mesh(new THREE.CylinderGeometry(r*.74,r*.78,.04,64),lm);top.position.y=.26;lid.add(top);
  var sip=new THREE.Mesh(new THREE.BoxGeometry(r*.32,.03,.08),new THREE.MeshStandardMaterial({color:0x050404,roughness:.9}));sip.position.set(0,.285,r*.5);lid.add(sip);
- lid.userData.h=.3;root.add(lid);place(0)});
+ lid.userData.h=.3;root.add(lid);makeSurface(r*.9);place(0)});
 var beanMat=new THREE.MeshStandardMaterial({color:0x4a2511,roughness:.32,metalness:.05});
 L.load('bean.glb',function(gl){
  var spots=[[-3.1,1.2,-1.5],[3.0,.9,-1],[-2.4,-1.4,.6],[2.6,-1.6,.2],[-3.6,-.2,-3],[3.7,2.1,-3],[.9,2.4,-2.2],[-1.2,2.6,-3.4]];
  spots.forEach(function(p,i){var o=gl.scene.clone(true);o.traverse(function(c){if(c.isMesh){c.material=beanMat}});var n=norm(o,.42+(i%3)*.08);n.g.position.set(p[0],p[1],p[2]);n.g.userData={x:p[0],y:p[1],z:p[2],ph:i*1.3,sp:.25+(i%4)*.07};n.g.rotation.set(i,i*.7,i*.3);root.add(n.g);beans.push(n.g)})});
-var sg=new THREE.CylinderGeometry(.045,.06,1,16,1,true);sg.translate(0,-.5,0);
-stream=new THREE.Mesh(sg,new THREE.MeshBasicMaterial({color:0x2b1509}));stream.visible=false;root.add(stream);
+/* --- realistyczna kawa: odbicia otoczenia, falująca struga, kropelki, tafla z pianką --- */
+/* płyn: ciemny środek, bursztynowe prześwitujące brzegi, połysk od światła (shader) */
+var coffeeMat=new THREE.ShaderMaterial({transparent:true,
+ vertexShader:'varying vec3 vN;varying vec3 vV;void main(){vec4 mv=modelViewMatrix*vec4(position,1.);vN=normalize(normalMatrix*normal);vV=-mv.xyz;gl_Position=projectionMatrix*mv;}',
+ fragmentShader:'varying vec3 vN;varying vec3 vV;void main(){vec3 N=normalize(vN),V=normalize(vV);if(dot(N,V)<0.)N=-N;float nv=clamp(dot(N,V),0.,1.);'+
+ 'vec3 dark=vec3(.16,.07,.025),amber=vec3(.62,.32,.11);vec3 c=mix(amber,dark,smoothstep(.05,.7,nv));'+
+ 'vec3 L1=normalize(vec3(-.55,.6,.6)),L2=normalize(vec3(.8,.25,-.4));'+
+ 'float s1=pow(max(dot(N,normalize(L1+V)),0.),90.)*1.1+pow(max(dot(N,normalize(L1+V)),0.),14.)*.12;'+
+ 'float rim=pow(1.-nv,3.)*max(dot(N,L2)+.35,0.)*.55;'+
+ 'c+=vec3(1.,.9,.75)*s1+vec3(1.,.72,.42)*rim;'+
+ 'gl_FragColor=vec4(c,mix(.82,1.,smoothstep(0.,.45,nv)));}'});
+var sg=new THREE.CylinderGeometry(.085,.055,1,32,90,true);sg.translate(0,-.5,0);
+var sBase=sg.attributes.position.array.slice(0);
+stream=new THREE.Mesh(sg,coffeeMat);
+stream.visible=false;root.add(stream);
+function wobble(t,len){var p=sg.attributes.position.array;len=len||4.5;
+ for(var i=0;i<p.length;i+=3){var x=sBase[i],y=sBase[i+1],z=sBase[i+2],d=-y,w=d*len;
+  var pulse=1+.09*Math.sin(w*8.5-t*24)+.045*Math.sin(w*20-t*47)+.03*Math.sin(w*2.7+t*7);
+  var neck=1-.3*d,ox=Math.sin(d*6+t*3.1)*.012*d,oz=Math.cos(d*5+t*2.7)*.01*d;
+  p[i]=x*pulse*neck+ox;p[i+1]=y;p[i+2]=z*pulse*neck+oz}
+ sg.attributes.position.needsUpdate=true;sg.computeVertexNormals()}
+/* tafla kawy z pianką (crema) */
+var surface=null;
+function makeSurface(r){var c=document.createElement('canvas');c.width=c.height=512;var x=c.getContext('2d');
+ var g=x.createRadialGradient(256,256,10,256,256,256);g.addColorStop(0,'#2b1208');g.addColorStop(.45,'#5a2c12');g.addColorStop(.78,'#9a5a28');g.addColorStop(.93,'#c8874a');g.addColorStop(1,'#7a4420');
+ x.fillStyle=g;x.fillRect(0,0,512,512);
+ for(var i=0;i<1600;i++){var a=Math.random()*6.283,rr=Math.pow(Math.random(),.5)*250;x.fillStyle='rgba('+(Math.random()<.5?'230,170,110':'60,28,10')+','+(.05+Math.random()*.12)+')';x.beginPath();x.arc(256+Math.cos(a)*rr,256+Math.sin(a)*rr,.6+Math.random()*2.2,0,6.3);x.fill()}
+ x.strokeStyle='rgba(215,150,90,.28)';x.lineWidth=7;for(var k=0;k<3;k++){x.beginPath();for(var s=0;s<220;s++){var an=s*.07+k*2.1,rad=30+s*1.0;x.lineTo(256+Math.cos(an)*rad,256+Math.sin(an)*rad)}x.stroke()}
+ var tx=new THREE.CanvasTexture(c);tx.encoding=THREE.sRGBEncoding;
+ surface=new THREE.Mesh(new THREE.CircleGeometry(r,64),new THREE.MeshPhysicalMaterial({map:tx,roughness:.28,clearcoat:.7,clearcoatRoughness:.15,envMapIntensity:1.1}));
+ surface.rotation.x=-Math.PI/2;surface.visible=false;root.add(surface)}
+/* kropelki przy uderzeniu strugi */
+var drops=[],dropGeo=new THREE.SphereGeometry(1,12,10);
+for(var di=0;di<22;di++){var dm=new THREE.Mesh(dropGeo,coffeeMat);dm.visible=false;dm.userData={life:0,v:new THREE.Vector3()};root.add(dm);drops.push(dm)}
+var pouring=false,surfY=0;
+function updDrops(dt){drops.forEach(function(d){var u=d.userData;
+ if(u.life<=0){if(pouring&&Math.random()<dt*28){u.life=.25+Math.random()*.35;var a=Math.random()*6.283,sp=.35+Math.random()*.7;u.v.set(Math.cos(a)*sp,1+Math.random()*1.4,Math.sin(a)*sp);d.position.set(Math.cos(a)*.04,surfY+.02,Math.sin(a)*.04);var s=.012+Math.random()*.026;d.scale.set(s,s*1.25,s);d.visible=true}else{d.visible=false}return}
+ u.life-=dt;u.v.y-=9.5*dt;d.position.addScaledVector(u.v,dt);if(d.position.y<surfY-.01||u.life<=0){u.life=0;d.visible=false}})}
 
 function fit(){var w=cv.clientWidth,h=cv.clientHeight;if(!w||!h)return;R.setSize(w,h,false);cam.aspect=w/h;cam.position.z=w/h<.8?14:10;cam.updateProjectionMatrix()}
 if(window.ResizeObserver)new ResizeObserver(fit).observe(cv);else addEventListener('resize',fit);fit();
@@ -226,10 +299,13 @@ function place(t){
  cup.position.y=cy;
  var up=seg(t,1.8,3)-seg(t,6.2,7.4);
  if(lid){lid.position.set(.35*up,cy+cupTopY-.02+1.7*up,0);lid.rotation.z=-.5*up;lid.rotation.x=.3*up}
- var pin=seg(t,3,3.9),pout=seg(t,5.4,6.1);
+ var pin=seg(t,3,3.8),pout=seg(t,5.5,6.1),fill=seg(t,3.5,6);
+ surfY=cy+cupTopY-.5+.34*fill;
+ if(surface){surface.position.y=surfY;surface.visible=up>.05&&fill>0}
  stream.visible=pin>0&&pout<1;
- var top=cy+cupTopY+3.4;stream.position.set(0,top,0);
- var len=3.4*pin;stream.scale.set(1,Math.max(.001,len*(1-pout)),1);stream.position.y=top-3.4*pout;
+ var top=cy+cupTopY+3.8,full=top-surfY;
+ stream.position.set(0,top-full*pout,0);stream.scale.set(1,Math.max(.001,full*pin*(1-pout)),1);
+ pouring=stream.visible&&pin>.97&&pout<.6;
  cup.rotation.y=t*.18;
  setHead(t<3?0:(t<8.5?1:2));
 }
@@ -239,6 +315,9 @@ addEventListener('pointermove',function(e){mx=e.clientX/innerWidth-.5;my=e.clien
 function loop(now){requestAnimationFrame(loop);var dt=Math.min(.05,(now-last)/1000);last=now;if(!vis)return;
  if(still){clock=9;first=false}else{clock+=dt;if(clock>T){clock=0;first=false}}
  place(clock);
+ if(stream.visible)wobble(now/1000,stream.scale.y);
+ updDrops(dt);
+ if(surface)surface.rotation.z+=dt*.25;
  beans.forEach(function(b){var u=b.userData;b.position.y=u.y+Math.sin(now/1000*u.sp+u.ph)*.25;b.position.x=u.x+mx*(.6+u.z*-.15);b.rotation.x+=dt*u.sp;b.rotation.y+=dt*u.sp*.7});
  root.rotation.y=mx*.12;root.rotation.x=my*.05;
  var w=cv.clientWidth/cv.clientHeight;root.scale.setScalar(w<.8?.8:1);
