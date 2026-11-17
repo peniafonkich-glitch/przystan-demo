@@ -241,7 +241,7 @@ L.load('cup.glb',function(gl){gl.scene.traverse(function(c){if(c.isMesh){c.mater
  var dome=new THREE.Mesh(new THREE.CylinderGeometry(r*.78,r*.98,.2,64),lm);dome.position.y=.14;lid.add(dome);
  var top=new THREE.Mesh(new THREE.CylinderGeometry(r*.74,r*.78,.04,64),lm);top.position.y=.26;lid.add(top);
  var sip=new THREE.Mesh(new THREE.BoxGeometry(r*.32,.03,.08),new THREE.MeshStandardMaterial({color:0x050404,roughness:.9}));sip.position.set(0,.285,r*.5);lid.add(sip);
- lid.userData.h=.3;root.add(lid);makeSurface(r*.9);place(0)});
+ lid.userData.h=.3;lid.userData.r=r;root.add(lid);makeSurface(r*.9);place(0)});
 var beanMat=new THREE.MeshStandardMaterial({color:0x4a2511,roughness:.32,metalness:.05});
 L.load('bean.glb',function(gl){
  var spots=[[-3.1,1.2,-1.5],[3.0,.9,-1],[-2.4,-1.4,.6],[2.6,-1.6,.2],[-3.6,-.2,-3],[3.7,2.1,-3],[.9,2.4,-2.2],[-1.2,2.6,-3.4]];
@@ -298,7 +298,7 @@ function place(t){
  var cy=baseY+(-4.5)*(1-rise);
  cup.position.y=cy;
  var up=seg(t,1.8,3)-seg(t,6.2,7.4);
- if(lid){lid.position.set((cv.clientWidth/cv.clientHeight<.8?1.2:1.75)*up,cy+cupTopY-.02+1.25*up,-.4*up);lid.rotation.z=-.6*up;lid.rotation.x=.25*up}
+ if(lid){lid.position.set((lid.userData.r*.95+.16)*up,cy+cupTopY-.02+1.7*up,0);lid.rotation.z=-.5*up;lid.rotation.x=.3*up}
  var pin=seg(t,3,3.8),pout=seg(t,5.5,6.1),fill=seg(t,3.5,6);
  surfY=cy+cupTopY-.5+.34*fill;
  if(surface){surface.position.y=surfY;var ss=.84+.16*fill;surface.scale.set(ss,ss,1);surface.visible=up>.05&&fill>0}
