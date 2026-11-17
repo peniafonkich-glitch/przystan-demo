@@ -302,8 +302,6 @@ function place(t){
  var pin=seg(t,3,3.8),pout=seg(t,5.5,6.1),fill=seg(t,3.5,6);
  surfY=cy+cupTopY-.5+.34*fill;
  if(surface){surface.position.y=surfY;var ss=.84+.16*fill;surface.scale.set(ss,ss,1);surface.visible=up>.05&&fill>0}
- /* kamera "z góry" podczas nalewania: widać otwór kubka i rosnącą taflę kawy */
- view=seg(t,2.2,3.2)-seg(t,6.6,7.8);
  stream.visible=pin>0&&pout<1;
  var top=cy+cupTopY+3.8,full=top-surfY;
  stream.position.set(0,top-full*pout,0);stream.scale.set(1,Math.max(.001,full*pin*(1-pout)),1);
@@ -321,7 +319,7 @@ function loop(now){requestAnimationFrame(loop);var dt=Math.min(.05,(now-last)/10
  updDrops(dt);
  if(surface)surface.rotation.z+=dt*.25;
  beans.forEach(function(b){var u=b.userData;b.position.y=u.y+Math.sin(now/1000*u.sp+u.ph)*.25;b.position.x=u.x+mx*(.6+u.z*-.15);b.rotation.x+=dt*u.sp;b.rotation.y+=dt*u.sp*.7});
- root.rotation.y=mx*.12;root.rotation.x=my*.05+.42*view;
+ root.rotation.y=mx*.12;root.rotation.x=my*.05;
  var w=cv.clientWidth/cv.clientHeight;root.scale.setScalar(w<.8?.8:1);
  R.render(S,cam)}
 requestAnimationFrame(loop);
