@@ -298,7 +298,7 @@ function place(t){
  var cy=baseY+(-4.5)*(1-rise);
  cup.position.y=cy;
  var up=seg(t,1.8,3)-seg(t,6.2,7.4);
- if(lid){lid.position.set(.35*up,cy+cupTopY-.02+1.7*up,0);lid.rotation.z=-.5*up;lid.rotation.x=.3*up}
+ if(lid){lid.position.set((cv.clientWidth/cv.clientHeight<.8?1.2:1.75)*up,cy+cupTopY-.02+1.25*up,-.4*up);lid.rotation.z=-.6*up;lid.rotation.x=.25*up}
  var pin=seg(t,3,3.8),pout=seg(t,5.5,6.1),fill=seg(t,3.5,6);
  surfY=cy+cupTopY-.5+.34*fill;
  if(surface){surface.position.y=surfY;var ss=.84+.16*fill;surface.scale.set(ss,ss,1);surface.visible=up>.05&&fill>0}
